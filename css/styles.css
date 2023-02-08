@@ -8,6 +8,7 @@
   --btn-border-color: #e7e9fc;
   --btn-active-color: #404bbf;
   --hero-gr-bg: linear-gradient(rgba(46, 47, 66, 0.7), rgba(46, 47, 66, 0.7));
+  --ttf: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -161,11 +162,28 @@ img {
 
   letter-spacing: 0.02em;
   color: var(--main-color);
+  transition: color 250ms var(--ttf);
 }
 
 .header-link:hover,
 .header-link:focus {
   color: var(--btn-active-color);
+}
+
+.current {
+  color: #404bbf;
+  position: relative;
+}
+
+.current::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -24px;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: #404bbf;
 }
 
 .address {
@@ -185,6 +203,7 @@ img {
 
   letter-spacing: 0.02em;
   color: var(--second-color);
+  transition: color 250ms var(--ttf);
 }
 
 .header-mail:hover,
@@ -199,6 +218,7 @@ img {
 
   letter-spacing: 0.02em;
   color: var(--second-color);
+  transition: color 250ms var(--ttf);
 }
 
 .header-tel:hover,
@@ -245,20 +265,14 @@ img {
   border: none;
   border-radius: 4px;
   margin-top: 48px;
+  transition: background-color 250ms var(--ttf), box-shadow 250ms var(--ttf);
 }
 
 .hero-btn:hover,
 .hero-btn:focus {
-  background: var(--fifth-color);
+  background-color: var(--btn-active-color);
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
-  border-radius: 4px;
-}
-
-.hero-btn:active {
-  background: var(--btn-active-color);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
 }
 
 /* --------------------------- FEATURES */
@@ -349,7 +363,7 @@ img {
 
 .team-list-item {
   width: calc((100% - 96px) / 4);
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
   border-radius: 0px 0px 4px 4px;
@@ -387,10 +401,11 @@ img {
   justify-content: center;
   background-color: var(--fifth-color);
   border-radius: 50%;
+  transition: background-color 250ms var(--ttf);
 }
 
 .team-soc-link:is(:hover, :focus) {
-  background: var(--btn-active-color);
+  background-color: var(--btn-active-color);
 }
 
 /* ------------------------ CUSTOMERS */
@@ -427,6 +442,7 @@ img {
   align-items: center;
   justify-content: center;
   color: #8e8f99;
+  transition: border-color 250ms var(--ttf), color 250ms var(--ttf);
 }
 
 .customers-icon {
@@ -512,6 +528,7 @@ img {
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+  transition: background-color 250ms var(--ttf);
 }
 
 .footer-social-link:is(:hover, :focus) {
@@ -552,15 +569,16 @@ img {
 
   border: 1px solid var(--btn-border-color);
   border-radius: 4px;
+  transition: color 250ms var(--ttf), background-color 250ms var(--ttf),
+    box-shadow 250ms var(--ttf);
 }
 
 .buttons-list-item:hover,
 .buttons-list-item:focus {
   color: var(--third-color);
-  background: var(--fifth-color);
+  background-color: var(--fifth-color);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
 }
 
 /* ---------CARDS LIST---------- */
@@ -574,11 +592,36 @@ img {
 
 .cards-list-item {
   width: calc((100% - 48px) / 3);
+  transition: box-shadow 250ms var(--ttf);
 }
 
 .cards-list-item:is(:hover, :focus) {
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+.cards-list-item:hover .cards-top-text {
+  transform: translateY(0%);
+}
+
+.card-top-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.cards-top-text {
+  position: absolute;
+  top: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: #f4f4fd;
+  background-color: var(--fifth-color);
+  padding: 40px 32px 164px 32px;
+  height: 100%;
+  transform: translateY(100%);
+  transition: transform 250ms var(--ttf);
+  overflow: auto;
 }
 
 .cards-content {
@@ -605,4 +648,55 @@ img {
   letter-spacing: 0.02em;
 
   color: var(--second-color);
+}
+
+/* ---------MODAL---------- */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+  transition: opacity 250ms var(--ttf), visibility 250ms var(--ttf);
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal {
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 408px;
+  min-height: 576px;
+  background-color: #fcfcfc;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: transform 250ms var(--ttf);
+}
+
+.backdrop.is-hidden .modal{
+  transform: translate(-50%, -50%) scale(0);
+
+}
+
+.modal-close {
+  width: 24px;
+  height: 24px;
+  background-color: #e7e9fc;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+}
+
+.close-icon {
+  color: #000000;
 }
